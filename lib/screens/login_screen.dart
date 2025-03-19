@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginScreen extends StatelessWidget {
   final AuthService _authService = AuthService();
@@ -14,16 +13,10 @@ class LoginScreen extends StatelessWidget {
     final password = _passwordController.text;
 
     try {
-      final token = await _authService.login(
+      await _authService.login(
         email,
         password,
-      ); // Fetch the token
-      final storage = FlutterSecureStorage();
-      await storage.write(
-        key: 'auth_token',
-        value: token,
-      ); // Store the token securely
-
+      ); // Token is fetched but not stored or used
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Container(
